@@ -1,0 +1,18 @@
+package com.codec.generic
+
+import cats.data.Validated
+
+abstract class Codec[SerializeType, ParsedType] {
+  def parse(a: SerializeType): Validated[ParsingError, ParsedType]
+  def serialize(b: ParsedType): SerializeType  
+}
+
+object Codec {
+  def apply[A, B]()(using Codec[A, B]): Codec[A, B] = summon[Codec[A, B]]
+  def create[A, B](parser: Parser[A, B], serializer: Serializer[A, B]): Codec[A, B] = {
+    new Codec[A, B] {
+      def parse(a: A) = parser.parse(a)
+      def serialize(b: B) = serializer.serialize(b)
+    }
+  }
+}
