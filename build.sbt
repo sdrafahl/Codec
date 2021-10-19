@@ -13,7 +13,7 @@ lazy val root = project
     scalaVersion := scala3Version,
 
     // To cross compile with Scala 3 and Scala 2
-    // crossScalaVersions := Seq(scala3Version, scala2Version)
+    crossScalaVersions := Seq(scala3Version, scala2Version)
   )
 
 lazy val genericCodecDependencies = Seq(
