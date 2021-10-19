@@ -7,15 +7,16 @@ import io.circe.Derivation.summonDecoder
 import com.codec.generic.Parser
 
 abstract class CirceParserConnector[B ,T <: com.codec.generic.Parser[B]] {
-  extension (genericCodec: T) def circeDecoderFromCodec: Decoder[B]
+  def createDecoder(genericCodec: T): Decoder[B]
+  extension (genericCodec: T) def circeDecoderFromCodec: Decoder[B] = createDecoder(genericCodec)
 }
 
 object CirceParserConnector {
   given [A ,B](using baseDecoder: Decoder[A]): CirceParserConnector[B, CustomParser[A, B]] with {
-    extension (customParser: CustomParser[A, B]) def circeDecoderFromCodec: Decoder[B] = baseDecoder.emap(customParser.parse.andThen(validation => validation.toEither.left.map(_.show)))
+    def createDecoder(customParser: CustomParser[A, B]): Decoder[B] = baseDecoder.emap(customParser.parse.andThen(validation => validation.toEither.left.map(_.show)))
   }
 
-  given [B]: CirceParserConnector[B, GenericParser[B]] with {
-    extension (genericCodec: GenericParser[B]) def circeDecoderFromCodec: Decoder[B] = summonDecoder[B]
+  given [B](using Decoder[B]): CirceParserConnector[B, GenericParser[B]] with {
+    def createDecoder(genericCodec: GenericParser[B]): Decoder[B] = summonDecoder[B]
   }
 }

@@ -4,16 +4,13 @@ import io.circe.Codec
 import io.circe.Encoder
 import io.circe.Decoder
 
-abstract class CirceCodecConnector {
-  extension [A, B](genericCodec :com.codec.generic.Codec[B]) def circeCodecFromCodec(using CirceSerializerConnector, CirceParserConnector): Codec[B]
+abstract class CirceCodecConnector[B] {
+  extension (genericCodec :com.codec.generic.Codec[B]) def circeCodecFromCodec(using CirceSerializerConnector[B, com.codec.generic.Serializer[B]], CirceParserConnector[B, com.codec.generic.Parser[B]]): Codec[B]
 }
 
-object CirceCodecConnector {
-  def apply()(using CirceCodecConnector) = summon[CirceCodecConnector]
-  given CirceCodecConnector with
-      extension [A, B](genericCodec :com.codec.generic.Codec[B]) def circeCodecFromCodec(using CirceSerializerConnector, CirceParserConnector): Codec[B] = {
-    val circeEncoder: Decoder[B] = genericCodec.parser.circeDecoderFromCodec
-    val circeDecoder: Encoder[B] = genericCodec.serializer.circeEncoderFromCodec
-    Codec.from(circeEncoder, circeDecoder)
+object CirceCodecConnector {  
+  given [B]: CirceCodecConnector[B] with {
+    extension (genericCodec :com.codec.generic.Codec[B]) def circeCodecFromCodec(using csc: CirceSerializerConnector[B, com.codec.generic.Serializer[B]], cpc: CirceParserConnector[B, com.codec.generic.Parser[B]]): Codec[B] = Codec.from(cpc.createDecoder(genericCodec.parser), csc.createEncoder(genericCodec.serializer))
   }
+      
 }
