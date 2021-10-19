@@ -7,7 +7,7 @@ lazy val root = project
     name := "scala3-cross",
     version := "0.1.0",
 
-    libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % Test,
+    libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % Test,    
     libraryDependencies ++= genericCodecDependencies,
     // To make the default compiler and REPL use Dotty
     scalaVersion := scala3Version,
@@ -26,14 +26,22 @@ lazy val CodecGeneric = (project in file("CodecGeneric"))
     scalaVersion := scala3Version,
   )
 
+lazy val commonTestDependencies = Seq(
+  "org.scalameta" %% "munit-scalacheck" % "0.7.29" % Test,
+  "org.scalameta" %% "munit" % "0.7.29"
+)
+
 lazy val circeCodecConnectorDependencies = Seq(
-  "io.circe" %% "circe-core" % "0.14.1"
+  "io.circe" %% "circe-core" % "0.14.1",
+  "io.circe" %% "circe-generic" % "0.14.1",
+  "io.circe" %% "circe-extras" % "0.14.1"
 )
 
 lazy val CirceCodecConnector = (project in file("CirceCodecConnector"))
   .settings(
     libraryDependencies ++= genericCodecDependencies,
     libraryDependencies ++= circeCodecConnectorDependencies,
+    libraryDependencies ++= commonTestDependencies,
     scalaVersion := scala3Version,
   )
   .dependsOn(CodecGeneric)

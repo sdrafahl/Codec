@@ -18,8 +18,8 @@ object CirceSerializerConnector {
     def createEncoder(genericSerialize: Serializer.CustomSerializer[A, B]): Encoder[B] = Encoder.instance(genericSerialize.serialize.andThen(a => baseEncoder(a)))
   }
 
-  given [B](using Encoder[B]): CirceSerializerConnector[B, Serializer.GenericSerializer[B]] with {
-    def createEncoder(genericCodec: Serializer.GenericSerializer[B]): Encoder[B] = summonEncoder[B]
+  given [B](using baseEncoder: Encoder[B]): CirceSerializerConnector[B, Serializer.GenericSerializer[B]] with {
+    def createEncoder(genericCodec: Serializer.GenericSerializer[B]): Encoder[B] = baseEncoder
   }
 
 }
