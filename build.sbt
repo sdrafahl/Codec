@@ -1,6 +1,40 @@
 val scala2Version = "2.13.6"
 val scala3Version = "3.0.2"
 
+credentials += Credentials("Sonatype Nexus Repository Manager", "s01.oss.sonatype.org", "sdrafahl", Try(scala.sys.env("NEXUS_PASSWORD")).getOrElse(""))
+
+scmInfo := Some(
+  ScmInfo(
+    url("https://github.com/sdrafahl/Codec"),
+    "scm:git@github.com:sdrafahl/Codec.git"
+  )
+)
+developers := List(
+  Developer(
+    id    = "sdrafahl",
+    name  = "Shane Drafahl",
+    email = "shanedrafahl@gmail.com",
+    url   = url("https://github.com/sdrafahl/Codec")
+  )
+)
+
+description := "Library for migrations" +  ""
+licenses := Seq("MIT" -> url("https://github.com/sdrafahl/Codec/blob/master/LICENSE"))
+homepage := Some(url("https://github.com/sdrafahl/Codec"))
+
+pomIncludeRepository := { _ => false }
+publishTo := {
+  val nexus = "https://s01.oss.sonatype.org/"
+  if (isSnapshot.value) Some("snapshots" at nexus + "service/local/staging/deploy/maven2")
+  else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+}
+
+publishMavenStyle := true
+
+sonatypeProjectHosting := Some(GitHubHosting("sdrafahl", "codec", "shanedrafahl@gmail.com"))
+usePgpKeyHex("76DA99CA42B1819F85F0F09905F8D10A76F31F69")
+ThisBuild / versionScheme := Some("pvp")
+
 lazy val root = project
   .in(file("."))
   .settings(
