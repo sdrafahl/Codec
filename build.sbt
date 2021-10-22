@@ -1,6 +1,7 @@
 import java.io.File
 import java.nio.file.{Files, Path, StandardCopyOption}
 import scala.sys.process._
+import xerial.sbt.Sonatype._
 import scala.util.Try
 
 val scala2Version = "2.13.6"
