@@ -38,14 +38,14 @@ publishTo := {
 publishMavenStyle := true
 
 sonatypeProjectHosting := Some(GitHubHosting("sdrafahl", "codec", "shanedrafahl@gmail.com"))
-usePgpKeyHex("76DA99CA42B1819F85F0F09905F8D10A76F31F69")
+usePgpKeyHex("3E988A32587347BB874E66D9E30BD37D3C50EF1E")
 ThisBuild / versionScheme := Some("pvp")
 
 lazy val root = project
   .in(file("."))
   .settings(
-    name := "scala3-cross",
-    version := "0.1.0",
+    name := "Codec",
+    version := "0.0.1",
 
     libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % Test,    
     libraryDependencies ++= genericCodecDependencies,
