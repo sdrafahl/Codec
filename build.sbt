@@ -38,7 +38,7 @@ lazy val CodecGeneric = (project in file("CodecGeneric"))
     credentials += Credentials(
       "GnuPG Key ID",
       "gpg",
-      "3E988A32587347BB874E66D9E30BD37D3C50EF1E", // key identifier
+      "3EB7AE1FB9021F93C34D7FBE9F0575C8DE28E1D4", // key identifier
       "ignored" // this field is ignored; passwords are supplied by pinentry
     ),
     scmInfo := Some(
@@ -97,7 +97,7 @@ lazy val CirceCodecConnector = (project in file("CirceCodecConnector"))
     credentials += Credentials(
       "GnuPG Key ID",
       "gpg",
-      "3E988A32587347BB874E66D9E30BD37D3C50EF1E", // key identifier
+      "3EB7AE1FB9021F93C34D7FBE9F0575C8DE28E1D4", // key identifier
       "ignored" // this field is ignored; passwords are supplied by pinentry
     ),
     scmInfo := Some(
