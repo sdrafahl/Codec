@@ -4,25 +4,11 @@ import scala.sys.process._
 import xerial.sbt.Sonatype._
 import scala.util.Try
 
-val scala2Version = "2.13.6"
 val scala3Version = "3.0.2"
 
-// lazy val root = project
-//   .in(file("."))
-//   .settings(
-//     name := "codec",
-//     version := "0.0.1",
-
-//     libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % Test,    
-//     libraryDependencies ++= genericCodecDependencies,
-//     // To make the default compiler and REPL use Dotty
-//     scalaVersion := scala3Version,
-
-//     // To cross compile with Scala 3 and Scala 2
-//     //crossScalaVersions := Seq(scala3Version, scala2Version)
-//   ).dependsOn(CodecGeneric)
-
 ThisBuild / versionScheme := Some("pvp")
+
+publish / skip := true
 
 lazy val genericCodecDependencies = Seq(
   "org.typelevel" %% "cats-core" % "2.6.1"
