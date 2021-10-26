@@ -33,7 +33,7 @@ lazy val CodecGeneric = (project in file("CodecGeneric"))
     name := "codecgeneric",
     libraryDependencies ++= genericCodecDependencies,
     scalaVersion := scala3Version,
-    version := "0.0.1",
+    version := "0.0.6",
     credentials += Credentials("Sonatype Nexus Repository Manager", "s01.oss.sonatype.org", "sdrafahl", Try(scala.sys.env("NEXUS_PASSWORD")).getOrElse("")),
     credentials += Credentials(
       "GnuPG Key ID",
@@ -88,7 +88,7 @@ lazy val circeCodecConnectorDependencies = Seq(
 lazy val CirceCodecConnector = (project in file("CirceCodecConnector"))
   .settings(
     name := "circecodecconnector",
-    version := "0.0.1",
+    version := "0.0.6",
     libraryDependencies ++= genericCodecDependencies,
     libraryDependencies ++= circeCodecConnectorDependencies,
     libraryDependencies ++= commonTestDependencies,
