@@ -22,6 +22,8 @@ val scala3Version = "3.0.2"
 //     //crossScalaVersions := Seq(scala3Version, scala2Version)
 //   ).dependsOn(CodecGeneric)
 
+usePgpKeyHex("3E988A32587347BB874E66D9E30BD37D3C50EF1E")
+
 lazy val genericCodecDependencies = Seq(
   "org.typelevel" %% "cats-core" % "2.6.1"
 )
@@ -32,14 +34,14 @@ lazy val CodecGeneric = (project in file("CodecGeneric"))
     libraryDependencies ++= genericCodecDependencies,
     scalaVersion := scala3Version,
     version := "0.0.1",
-    credentials += Credentials("Sonatype Nexus Repository Manager", "s01.oss.sonatype.org", "sdrafahl", Try(scala.sys.env("NEXUS_PASSWORD")).getOrElse(""))
+    credentials += Credentials("Sonatype Nexus Repository Manager", "s01.oss.sonatype.org", "sdrafahl", Try(scala.sys.env("NEXUS_PASSWORD")).getOrElse("")),
 
     scmInfo := Some(
       ScmInfo(
         url("https://github.com/sdrafahl/Codec"),
         "scm:git@github.com:sdrafahl/Codec.git"
       )
-    )
+    ),
       developers := List(
         Developer(
           id    = "sdrafahl",
@@ -47,19 +49,19 @@ lazy val CodecGeneric = (project in file("CodecGeneric"))
           email = "shanedrafahl@gmail.com",
           url   = url("https://github.com/sdrafahl/Codec")
         )
-      )
+      ),
 
-    description := "Library for migrations" +  ""
-      licenses := Seq("MIT" -> url("https://github.com/sdrafahl/Codec/blob/master/LICENSE"))
-      homepage := Some(url("https://github.com/sdrafahl/Codec"))
+    description := "Library for migrations" +  "",
+      licenses := Seq("MIT" -> url("https://github.com/sdrafahl/Codec/blob/master/LICENSE")),
+      homepage := Some(url("https://github.com/sdrafahl/Codec")),
 
-    pomIncludeRepository := { _ => false }
+    pomIncludeRepository := { _ => false },
 
-    publishMavenStyle := true
+    publishMavenStyle := true,
 
-    sonatypeProjectHosting := Some(GitHubHosting("sdrafahl", "codec", "shanedrafahl@gmail.com"))
-      usePgpKeyHex("3E988A32587347BB874E66D9E30BD37D3C50EF1E")
-      ThisBuild / versionScheme := Some("pvp")
+    sonatypeProjectHosting := Some(GitHubHosting("sdrafahl", "codec", "shanedrafahl@gmail.com")),
+      
+      versionScheme := Some("pvp"),
       publishTo := {
         val nexus = "https://s01.oss.sonatype.org/"
         if (isSnapshot.value) Some("snapshots" at nexus + "service/local/staging/deploy/maven2")
@@ -87,14 +89,14 @@ lazy val CirceCodecConnector = (project in file("CirceCodecConnector"))
     libraryDependencies ++= circeCodecConnectorDependencies,
     libraryDependencies ++= commonTestDependencies,
     scalaVersion := scala3Version,
-    credentials += Credentials("Sonatype Nexus Repository Manager", "s01.oss.sonatype.org", "sdrafahl", Try(scala.sys.env("NEXUS_PASSWORD")).getOrElse(""))
+    credentials += Credentials("Sonatype Nexus Repository Manager", "s01.oss.sonatype.org", "sdrafahl", Try(scala.sys.env("NEXUS_PASSWORD")).getOrElse("")),
 
     scmInfo := Some(
       ScmInfo(
         url("https://github.com/sdrafahl/Codec"),
         "scm:git@github.com:sdrafahl/Codec.git"
       )
-    )
+    ),
       developers := List(
         Developer(
           id    = "sdrafahl",
@@ -102,19 +104,18 @@ lazy val CirceCodecConnector = (project in file("CirceCodecConnector"))
           email = "shanedrafahl@gmail.com",
           url   = url("https://github.com/sdrafahl/Codec")
         )
-      )
+      ),
 
-    description := "Library for migrations" +  ""
-      licenses := Seq("MIT" -> url("https://github.com/sdrafahl/Codec/blob/master/LICENSE"))
-      homepage := Some(url("https://github.com/sdrafahl/Codec"))
+    description := "Library for migrations" +  "",
+      licenses := Seq("MIT" -> url("https://github.com/sdrafahl/Codec/blob/master/LICENSE")),
+      homepage := Some(url("https://github.com/sdrafahl/Codec")),
 
-    pomIncludeRepository := { _ => false }
+    pomIncludeRepository := { _ => false },
 
-    publishMavenStyle := true
+    publishMavenStyle := true,
 
-    sonatypeProjectHosting := Some(GitHubHosting("sdrafahl", "codec", "shanedrafahl@gmail.com"))
-      usePgpKeyHex("3E988A32587347BB874E66D9E30BD37D3C50EF1E")
-      ThisBuild / versionScheme := Some("pvp")
+    sonatypeProjectHosting := Some(GitHubHosting("sdrafahl", "codec", "shanedrafahl@gmail.com")),
+      versionScheme := Some("pvp"),
       publishTo := {
         val nexus = "https://s01.oss.sonatype.org/"
         if (isSnapshot.value) Some("snapshots" at nexus + "service/local/staging/deploy/maven2")
