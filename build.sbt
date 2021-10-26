@@ -25,6 +25,7 @@ val scala3Version = "3.0.2"
 usePgpKeyHex("3E988A32587347BB874E66D9E30BD37D3C50EF1E")
 
 ThisBuild / versionScheme := Some("pvp")
+ThisBuild / publishMavenStyle := true
 
 lazy val genericCodecDependencies = Seq(
   "org.typelevel" %% "cats-core" % "2.6.1"
