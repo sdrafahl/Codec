@@ -22,10 +22,7 @@ val scala3Version = "3.0.2"
 //     //crossScalaVersions := Seq(scala3Version, scala2Version)
 //   ).dependsOn(CodecGeneric)
 
-usePgpKeyHex("3E988A32587347BB874E66D9E30BD37D3C50EF1E")
-
 ThisBuild / versionScheme := Some("pvp")
-ThisBuild / publishMavenStyle := true
 
 lazy val genericCodecDependencies = Seq(
   "org.typelevel" %% "cats-core" % "2.6.1"
@@ -38,7 +35,12 @@ lazy val CodecGeneric = (project in file("CodecGeneric"))
     scalaVersion := scala3Version,
     version := "0.0.1",
     credentials += Credentials("Sonatype Nexus Repository Manager", "s01.oss.sonatype.org", "sdrafahl", Try(scala.sys.env("NEXUS_PASSWORD")).getOrElse("")),
-
+    credentials += Credentials(
+      "GnuPG Key ID",
+      "gpg",
+      "3E988A32587347BB874E66D9E30BD37D3C50EF1E", // key identifier
+      "ignored" // this field is ignored; passwords are supplied by pinentry
+    ),
     scmInfo := Some(
       ScmInfo(
         url("https://github.com/sdrafahl/Codec"),
@@ -92,7 +94,12 @@ lazy val CirceCodecConnector = (project in file("CirceCodecConnector"))
     libraryDependencies ++= commonTestDependencies,
     scalaVersion := scala3Version,
     credentials += Credentials("Sonatype Nexus Repository Manager", "s01.oss.sonatype.org", "sdrafahl", Try(scala.sys.env("NEXUS_PASSWORD")).getOrElse("")),
-
+    credentials += Credentials(
+      "GnuPG Key ID",
+      "gpg",
+      "3E988A32587347BB874E66D9E30BD37D3C50EF1E", // key identifier
+      "ignored" // this field is ignored; passwords are supplied by pinentry
+    ),
     scmInfo := Some(
       ScmInfo(
         url("https://github.com/sdrafahl/Codec"),
