@@ -30,7 +30,7 @@ homepage := Some(url("https://github.com/sdrafahl/Codec"))
 
 pomIncludeRepository := { _ => false }
 
-publishMavenStyle := true
+//publishMavenStyle := true
 
 sonatypeProjectHosting := Some(GitHubHosting("sdrafahl", "codec", "shanedrafahl@gmail.com"))
 usePgpKeyHex("3E988A32587347BB874E66D9E30BD37D3C50EF1E")
