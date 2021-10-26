@@ -20,7 +20,7 @@ lazy val CodecGeneric = (project in file("CodecGeneric"))
     libraryDependencies ++= genericCodecDependencies,
     scalaVersion := scala3Version,
     version := "0.0.6",
-    credentials += Credentials("Sonatype Nexus Repository Manager", "s01.oss.sonatype.org", "sdrafahl", Try(scala.sys.env("NEXUS_PASSWORD")).getOrElse("")),
+    credentials += Credentials("Sonatype Nexus Repository Manager", "s01.oss.sonatype.org", "sdrafahl", Try(scala.sys.env("SONATYPE_PASSWORD")).getOrElse("")),
     credentials += Credentials(
       "GnuPG Key ID",
       "gpg",
