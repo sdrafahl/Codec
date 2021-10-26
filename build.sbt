@@ -24,6 +24,8 @@ val scala3Version = "3.0.2"
 
 usePgpKeyHex("3E988A32587347BB874E66D9E30BD37D3C50EF1E")
 
+ThisBuild / versionScheme := Some("pvp")
+
 lazy val genericCodecDependencies = Seq(
   "org.typelevel" %% "cats-core" % "2.6.1"
 )
@@ -61,7 +63,6 @@ lazy val CodecGeneric = (project in file("CodecGeneric"))
 
     sonatypeProjectHosting := Some(GitHubHosting("sdrafahl", "codec", "shanedrafahl@gmail.com")),
       
-      versionScheme := Some("pvp"),
       publishTo := {
         val nexus = "https://s01.oss.sonatype.org/"
         if (isSnapshot.value) Some("snapshots" at nexus + "service/local/staging/deploy/maven2")
@@ -115,7 +116,6 @@ lazy val CirceCodecConnector = (project in file("CirceCodecConnector"))
     publishMavenStyle := true,
 
     sonatypeProjectHosting := Some(GitHubHosting("sdrafahl", "codec", "shanedrafahl@gmail.com")),
-      versionScheme := Some("pvp"),
       publishTo := {
         val nexus = "https://s01.oss.sonatype.org/"
         if (isSnapshot.value) Some("snapshots" at nexus + "service/local/staging/deploy/maven2")
