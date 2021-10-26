@@ -29,11 +29,6 @@ licenses := Seq("MIT" -> url("https://github.com/sdrafahl/Codec/blob/master/LICE
 homepage := Some(url("https://github.com/sdrafahl/Codec"))
 
 pomIncludeRepository := { _ => false }
-publishTo := {
-  val nexus = "https://s01.oss.sonatype.org/"
-  if (isSnapshot.value) Some("snapshots" at nexus + "service/local/staging/deploy/maven2")
-  else Some("releases" at nexus + "service/local/staging/deploy/maven2")
-}
 
 publishMavenStyle := true
 
@@ -41,20 +36,20 @@ sonatypeProjectHosting := Some(GitHubHosting("sdrafahl", "codec", "shanedrafahl@
 usePgpKeyHex("3E988A32587347BB874E66D9E30BD37D3C50EF1E")
 ThisBuild / versionScheme := Some("pvp")
 
-lazy val root = project
-  .in(file("."))
-  .settings(
-    name := "codec",
-    version := "0.0.1",
+// lazy val root = project
+//   .in(file("."))
+//   .settings(
+//     name := "codec",
+//     version := "0.0.1",
 
-    libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % Test,    
-    libraryDependencies ++= genericCodecDependencies,
-    // To make the default compiler and REPL use Dotty
-    scalaVersion := scala3Version,
+//     libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % Test,    
+//     libraryDependencies ++= genericCodecDependencies,
+//     // To make the default compiler and REPL use Dotty
+//     scalaVersion := scala3Version,
 
-    // To cross compile with Scala 3 and Scala 2
-    //crossScalaVersions := Seq(scala3Version, scala2Version)
-  ).dependsOn(CodecGeneric)
+//     // To cross compile with Scala 3 and Scala 2
+//     //crossScalaVersions := Seq(scala3Version, scala2Version)
+//   ).dependsOn(CodecGeneric)
 
 lazy val genericCodecDependencies = Seq(
   "org.typelevel" %% "cats-core" % "2.6.1"
@@ -66,6 +61,12 @@ lazy val CodecGeneric = (project in file("CodecGeneric"))
     libraryDependencies ++= genericCodecDependencies,
     scalaVersion := scala3Version,
     version := "0.0.1",
+    publishTo := {
+      val nexus = "https://s01.oss.sonatype.org/"
+      if (isSnapshot.value) Some("snapshots" at nexus + "service/local/staging/deploy/maven2")
+      else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+    }
+
   )
 
 lazy val commonTestDependencies = Seq(
@@ -87,5 +88,10 @@ lazy val CirceCodecConnector = (project in file("CirceCodecConnector"))
     libraryDependencies ++= circeCodecConnectorDependencies,
     libraryDependencies ++= commonTestDependencies,
     scalaVersion := scala3Version,
+    publishTo := {
+      val nexus = "https://s01.oss.sonatype.org/"
+      if (isSnapshot.value) Some("snapshots" at nexus + "service/local/staging/deploy/maven2")
+      else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+    }
   )
   .dependsOn(CodecGeneric)
