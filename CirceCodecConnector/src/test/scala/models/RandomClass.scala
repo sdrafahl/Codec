@@ -1,4 +1,4 @@
-package com.codec.generic.circe
+package io.github.sfrafahl.codec.generic.circe
 
 import org.scalacheck.Gen
 import org.scalacheck.Arbitrary

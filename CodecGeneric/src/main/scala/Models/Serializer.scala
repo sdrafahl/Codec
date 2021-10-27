@@ -1,4 +1,4 @@
-package com.codec.generic
+package io.github.sfrafahl.codec.generic
 
 enum Serializer[B] {
   case CustomSerializer[A, B](serialize: (B => A)) extends Serializer[B]

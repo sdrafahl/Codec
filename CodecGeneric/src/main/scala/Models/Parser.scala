@@ -1,4 +1,4 @@
-package com.codec.generic
+package io.github.sfrafahl.codec.generic
 
 import cats.data.Validated
 

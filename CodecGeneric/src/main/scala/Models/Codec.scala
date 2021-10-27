@@ -1,7 +1,7 @@
-package com.codec.generic
+package io.github.sfrafahl.codec.generic
 
-import com.codec.generic.Parser._
-import com.codec.generic.Serializer._
+import io.github.sfrafahl.codec.generic.Parser._
+import io.github.sfrafahl.codec.generic.Serializer._
 
 case class Codec[B, C <: Parser[B], D <: Serializer[B]](parser: C, serializer: D)
 
