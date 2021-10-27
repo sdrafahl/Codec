@@ -16,6 +16,7 @@ lazy val genericCodecDependencies = Seq(
 
 lazy val CodecGeneric = (project in file("CodecGeneric"))
   .settings(
+    organization := "io.github.sdrafahl",
     name := "codecgeneric",
     libraryDependencies ++= genericCodecDependencies,
     scalaVersion := scala3Version,
@@ -73,6 +74,7 @@ lazy val circeCodecConnectorDependencies = Seq(
 
 lazy val CirceCodecConnector = (project in file("CirceCodecConnector"))
   .settings(
+    organization := "io.github.sdrafahl",
     name := "circecodecconnector",
     version := "0.0.8",
     libraryDependencies ++= genericCodecDependencies,
