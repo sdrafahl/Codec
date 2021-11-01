@@ -5,9 +5,9 @@ import io.circe.Derivation.summonEncoder
 import cats.implicits._
 import io.github.sfrafahl.codec.generic.Serializer
 
-abstract class CirceSerializerConnector[B,T <: io.github.sfrafahl.codec.generic.Serializer[B]] {
-  def createEncoder(genericCodec:T): Encoder[B]
-  extension (genericCodec:T) def circeEncoderFromCodec: Encoder[B] = createEncoder(genericCodec)
+abstract class CirceSerializerConnector[B, T <: io.github.sfrafahl.codec.generic.Serializer[B]] {
+  def createEncoder(genericCodec: T): Encoder[B]
+  extension (genericCodec: T) def circeEncoderFromCodec: Encoder[B] = createEncoder(genericCodec)
 }
 
 object CirceSerializerConnector {
