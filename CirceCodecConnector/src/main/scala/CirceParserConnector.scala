@@ -1,12 +1,12 @@
-package io.github.sfrafahl.codec.generic.circe
+package io.codec.generic.circe
 
 import io.circe.Decoder
 import cats.implicits._
-import io.github.sfrafahl.codec.generic.Parser._
+import io.codec.generic.Parser._
 import io.circe.Derivation.summonDecoder
-import io.github.sfrafahl.codec.generic.Parser
+import io.codec.generic.Parser
 
-abstract class CirceParserConnector[B ,T <: io.github.sfrafahl.codec.generic.Parser[B]] {
+abstract class CirceParserConnector[B ,T <: io.codec.generic.Parser[B]] {
   def createDecoder(genericCodec: T): Decoder[B]
   extension (genericCodec: T) def circeDecoderFromCodec: Decoder[B] = createDecoder(genericCodec)
 }

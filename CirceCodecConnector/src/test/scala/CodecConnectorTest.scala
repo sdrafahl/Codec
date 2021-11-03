@@ -1,14 +1,14 @@
-package io.github.sfrafahl.codec.generic.circe
+package io.codec.generic.circe
 
 import munit.ScalaCheckSuite
 import org.scalacheck.Prop._
-import io.github.sfrafahl.codec.generic.Parser
-import io.github.sfrafahl.codec.generic.Serializer
-import io.github.sfrafahl.codec.generic.Codec
-import io.github.sfrafahl.codec.generic.Parser._
-import io.github.sfrafahl.codec.generic.Serializer._
+import io.codec.generic.Parser
+import io.codec.generic.Serializer
+import io.codec.generic.Codec
+import io.codec.generic.Parser._
+import io.codec.generic.Serializer._
 import munit.Clue.generate
-import io.github.sfrafahl.codec.generic.circe.CirceSerializerConnector._
+import io.codec.generic.circe.CirceSerializerConnector._
 import io.circe.Derivation._
 import io.circe.Decoder
 import io.circe.Encoder
@@ -17,7 +17,7 @@ import org.scalacheck.Arbitrary
 import org.scalacheck.Gen
 import io.circe.Derivation._
 import io.circe.generic.auto._
-import io.github.sfrafahl.codec.generic.circe.CirceCodecConnector.given
+import io.codec.generic.circe.CirceCodecConnector.given
 
 class CodecConnectorTest extends ScalaCheckSuite {    
 

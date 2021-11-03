@@ -1,4 +1,4 @@
-package io.github.sfrafahl.codec.generic
+package io.codec.generic
 
 import cats.Show
 import cats.implicits._
