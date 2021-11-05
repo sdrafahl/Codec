@@ -2,11 +2,9 @@ package io.codec.generic.circe
 
 import org.scalacheck.Gen
 import org.scalacheck.Arbitrary
-import io.codec.generic.Codec
-import io.codec.generic.Parser
-import io.codec.generic.Serializer
 import io.codec.generic.Parser._
 import io.codec.generic.Serializer._
+import io.codec.generic._
 
 case class RandomClass(name: String, numbers: List[Int])
 

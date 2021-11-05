@@ -14,7 +14,7 @@ object CirceCodecConnector {
 
   given genericCirceCodec[
     B,
-    C <: io.codec.generic.Parser.GenericParser[B],
+    C <: io.codec.generic.GenericParser[B],
     D <: io.codec.generic.Serializer.GenericSerializer[B]
   ](using
     cdc: CirceCodecConnector[B, C, D],
@@ -25,7 +25,7 @@ object CirceCodecConnector {
   given customCirceCodec[
     A,
     B,
-    C <: io.codec.generic.Parser.CustomParser[A, B],
+    C <: io.codec.generic.CustomParser[A, B],
     D <: io.codec.generic.Serializer.CustomSerializer[A, B]
   ](using
     cdc: CirceCodecConnector[B, C, D],
@@ -33,25 +33,25 @@ object CirceCodecConnector {
     csc: CirceSerializerConnector[B, D],
     cpc: CirceParserConnector[B, C]): Codec[B] = cdc.circeCodecFromCodec
 
-  given createCustomCodec[A, B]: CirceCodecConnector[B, io.codec.generic.Parser.CustomParser[A, B], io.codec.generic.Serializer.CustomSerializer[A, B]] with {
+  given createCustomCodec[A, B]: CirceCodecConnector[B, io.codec.generic.CustomParser[A, B], io.codec.generic.Serializer.CustomSerializer[A, B]] with {
     def createCodec(
       genericCodec :io.codec.generic.Codec[
         B,
-        io.codec.generic.Parser.CustomParser[A, B],
+        io.codec.generic.CustomParser[A, B],
         io.codec.generic.Serializer.CustomSerializer[A, B]]
     )(using csc: CirceSerializerConnector[B, io.codec.generic.Serializer.CustomSerializer[A, B]],
-      cpc: CirceParserConnector[B, io.codec.generic.Parser.CustomParser[A, B]]): Codec[B] =
+      cpc: CirceParserConnector[B, io.codec.generic.CustomParser[A, B]]): Codec[B] =
       Codec.from(cpc.createDecoder(genericCodec.parser), csc.createEncoder(genericCodec.serializer))
   }
 
-  given createGenericCodec[B]: CirceCodecConnector[B, io.codec.generic.Parser.GenericParser[B], io.codec.generic.Serializer.GenericSerializer[B]] with {
+  given createGenericCodec[B]: CirceCodecConnector[B, io.codec.generic.GenericParser[B], io.codec.generic.Serializer.GenericSerializer[B]] with {
     def createCodec(
       genericCodec :io.codec.generic.Codec[
         B,
-        io.codec.generic.Parser.GenericParser[B],
+        io.codec.generic.GenericParser[B],
         io.codec.generic.Serializer.GenericSerializer[B]]
     )(using csc: CirceSerializerConnector[B, io.codec.generic.Serializer.GenericSerializer[B]],
-      cpc: CirceParserConnector[B, io.codec.generic.Parser.GenericParser[B]]): Codec[B] =
+      cpc: CirceParserConnector[B, io.codec.generic.GenericParser[B]]): Codec[B] =
       Codec.from(cpc.createDecoder(genericCodec.parser), csc.createEncoder(genericCodec.serializer))
   }
 }
