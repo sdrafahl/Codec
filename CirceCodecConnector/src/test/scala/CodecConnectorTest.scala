@@ -2,21 +2,10 @@ package io.codec.generic.circe
 
 import munit.ScalaCheckSuite
 import org.scalacheck.Prop._
-import io.codec.generic.Parser
-import io.codec.generic.Serializer
 import io.codec.generic.Codec
-import io.codec.generic.Parser._
-import io.codec.generic.Serializer._
 import munit.Clue.generate
-import io.codec.generic.circe.CirceSerializerConnector._
-import io.circe.Derivation._
-import io.circe.Decoder
-import io.circe.Encoder
-import io.circe.syntax._
 import org.scalacheck.Arbitrary
 import org.scalacheck.Gen
-import io.circe.Derivation._
-import io.circe.generic.auto._
 import io.codec.generic.circe.CirceCodecConnector.given
 
 class CodecConnectorTest extends ScalaCheckSuite {    

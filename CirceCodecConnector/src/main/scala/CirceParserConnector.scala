@@ -15,12 +15,16 @@ abstract class CirceParserConnector[B ,T <: io.codec.generic.Parser[B]] {
 }
 
 object CirceParserConnector {
-  given [A ,B](using baseDecoder: Decoder[A]): CirceParserConnector[B, CustomParser[A, B]] with {
-    def createDecoder(customParser: CustomParser[A, B]): Decoder[B] = baseDecoder.emap(customParser.parse.andThen(validation => validation.toEither.left.map(_.show)))
+  inline given [A ,B](using inline m: Mirror.Of[A]): CirceParserConnector[B, CustomParser[A, B]] = new CirceParserConnector[B, CustomParser[A, B]] {
+    def createDecoder(customParser: CustomParser[A, B]): Decoder[B] = (Decoder.derived[A]).emap(customParser.parse.andThen(validation => validation.toEither.left.map(_.show)))
   }
 
   inline given[B](using inline m: Mirror.Of[B]): CirceParserConnector[B, GenericParser[B]] = new CirceParserConnector[B, GenericParser[B]] {
     def createDecoder(genericCodec: GenericParser[B]): Decoder[B] = Decoder.derived[B]
+  }
+
+  inline given[P, B](using inline m: Mirror.Of[P]): CirceParserConnector[B, MappedGenericParserImpl[P, B]] = new CirceParserConnector[B, MappedGenericParserImpl[P, B]] {
+    def createDecoder(genericCodec: MappedGenericParserImpl[P, B]): Decoder[B] = Decoder.derived[P].map(genericCodec.mapping)
   }
 
   inline given[P, B](using inline m: Mirror.Of[P]): CirceParserConnector[B, MappedGenericParser[P, B]] = new CirceParserConnector[B, MappedGenericParser[P, B]] {
