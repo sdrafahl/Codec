@@ -1,6 +1,8 @@
 # Codec
 Codec is a low level library to represent parsing and decoding. Lots of Scala libraries have some form of Codec. Any library that requires serialization such as Doobie, Slick, Circe, Skunk, ect. This library hopes to unify all of these codecs under one Codec class and then derive those other codecs from this codec.
 
+[![Scala CI](https://github.com/sdrafahl/Codec/actions/workflows/scala.yml/badge.svg?branch=master)](https://github.com/sdrafahl/Codec/actions/workflows/scala.yml)
+
 ## Circe Example
 
 ```
